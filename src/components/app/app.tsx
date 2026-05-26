@@ -12,8 +12,6 @@ import {
 } from './../../constants/articleProps';
 
 export const App = () => {
-	const [isOpen, setIsOpen] = useState(false);
-
 	const [articleState, setArticleState] =
 		useState<ArticleStateType>(defaultArticleState);
 
@@ -30,8 +28,6 @@ export const App = () => {
 				} as CSSProperties
 			}>
 			<ArticleParamsForm
-				isOpen={isOpen}
-				setIsOpen={setIsOpen}
 				articleState={articleState}
 				setArticleState={setArticleState}
 			/>

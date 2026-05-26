@@ -4,6 +4,9 @@ import clsx from 'clsx';
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import { Select } from 'src/ui/select';
+import { RadioGroup } from 'src/ui/radio-group';
+import { Separator } from 'src/ui/separator';
+import { Text } from 'src/ui/text';
 
 import {
 	ArticleStateType,
@@ -18,20 +21,16 @@ import {
 import styles from './ArticleParamsForm.module.scss';
 
 type ArticleParamsFormProps = {
-	isOpen: boolean;
-	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	articleState: ArticleStateType;
 	setArticleState: React.Dispatch<React.SetStateAction<ArticleStateType>>;
 };
 
 export const ArticleParamsForm = ({
-	isOpen,
-	setIsOpen,
 	articleState,
 	setArticleState,
 }: ArticleParamsFormProps) => {
 	const [formState, setFormState] = useState<ArticleStateType>(articleState);
-
+	const [isOpen, setIsOpen] = useState(false);
 	const sidebarRef = useRef<HTMLElement | null>(null);
 
 	useEffect(() => {
@@ -76,6 +75,9 @@ export const ArticleParamsForm = ({
 						setFormState(defaultArticleState);
 						setArticleState(defaultArticleState);
 					}}>
+					<Text as='h2' size={31} weight={800} uppercase>
+						Задайте параметры
+					</Text>
 					<Select
 						title='Шрифт'
 						selected={formState.fontFamilyOption}
@@ -88,8 +90,9 @@ export const ArticleParamsForm = ({
 						}
 					/>
 
-					<Select
+					<RadioGroup
 						title='Размер шрифта'
+						name='font-size'
 						selected={formState.fontSizeOption}
 						options={fontSizeOptions}
 						onChange={(option) =>
@@ -111,6 +114,7 @@ export const ArticleParamsForm = ({
 							})
 						}
 					/>
+					<Separator />
 
 					<Select
 						title='Цвет фона'
